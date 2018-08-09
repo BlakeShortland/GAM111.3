@@ -61,6 +61,5 @@ public class DoorButtonScript : MonoBehaviour
 	{
 		yield return new WaitForSecondsRealtime(openTimer);
 		Close();
-		Lock();
 	}
 }
