@@ -23,19 +23,12 @@ public class LaserController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (gameObject.tag != spawnedBeamTag)
+		if (timer >= updateFrequency)
 		{
-			if (timer >= updateFrequency)
-			{
-				timer = 0;
-				//Debug.Log("Redrawing laser");
-				foreach (GameObject laserSplit in GameObject.FindGameObjectsWithTag(spawnedBeamTag))
-					Destroy(laserSplit);
-
-				StartCoroutine(RedrawLaser());
-			}
-			timer += Time.deltaTime;
+			timer = 0;
+			StartCoroutine(RedrawLaser());
 		}
+		timer += Time.deltaTime;
 	}
 
 	IEnumerator RedrawLaser()
@@ -72,8 +65,6 @@ public class LaserController : MonoBehaviour
 				myLineRenderer.positionCount = vertexCounter;
 				Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * laserDistance);
 				myLineRenderer.SetPosition(vertexCounter - 1, lastPos);
-
-				Debug.Log(lastLaserPosition);
 
 				loopActive = false;
 			}
