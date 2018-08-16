@@ -11,13 +11,13 @@ public class LaserController : MonoBehaviour
 	public string spawnedBeamTag;
 	public int maxBounce;
 	private float timer = 0;
-	private LineRenderer mLineRenderer;
+	private LineRenderer myLineRenderer;
 
 	// Use this for initialization
 	void Start()
 	{
 		timer = 0;
-		mLineRenderer = gameObject.GetComponent<LineRenderer>();
+		myLineRenderer = gameObject.GetComponent<LineRenderer>();
 		StartCoroutine(RedrawLaser());
 	}
 
@@ -41,8 +41,6 @@ public class LaserController : MonoBehaviour
 
 	IEnumerator RedrawLaser()
 	{
-		//Debug.Log("Running");
-		int laserSplit = 1; //How many times it got split
 		int laserReflected = 1; //How many times it got reflected
 		int vertexCounter = 1; //How many line segments are there
 		bool loopActive = true; //Is the reflecting loop active?
@@ -50,35 +48,31 @@ public class LaserController : MonoBehaviour
 		Vector3 laserDirection = transform.forward; //direction of the next laser
 		Vector3 lastLaserPosition = transform.localPosition; //origin of the next laser
 
-		mLineRenderer.positionCount = 1;
-		mLineRenderer.SetPosition(0, transform.position);
+		myLineRenderer.positionCount = 1;
+		myLineRenderer.SetPosition(0, transform.position);
 		RaycastHit hit;
 
 		while (loopActive)
 		{
-			//Debug.Log("Physics.Raycast(" + lastLaserPosition + ", " + laserDirection + ", out hit , " + laserDistance + ")");
 			if (Physics.Raycast(lastLaserPosition, laserDirection, out hit, laserDistance) && ((hit.transform.gameObject.tag == bounceTag)))
 			{
-				//Debug.Log("Bounce");
 				laserReflected++;
 				vertexCounter += 3;
-				mLineRenderer.positionCount = vertexCounter;
-				mLineRenderer.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
-				mLineRenderer.SetPosition(vertexCounter - 2, hit.point);
-				mLineRenderer.SetPosition(vertexCounter - 1, hit.point);
+				myLineRenderer.positionCount = vertexCounter;
+				myLineRenderer.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
+				myLineRenderer.SetPosition(vertexCounter - 2, hit.point);
+				myLineRenderer.SetPosition(vertexCounter - 1, hit.point);
 				lastLaserPosition = hit.point;
 				Vector3 prevDirection = laserDirection;
 				laserDirection = Vector3.Reflect(laserDirection, hit.normal);
 			}
 			else
 			{
-				//Debug.Log("No Bounce");
 				laserReflected++;
 				vertexCounter++;
-				mLineRenderer.positionCount = vertexCounter;
+				myLineRenderer.positionCount = vertexCounter;
 				Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * laserDistance);
-				//Debug.Log("InitialPos " + lastLaserPosition + " Last Pos" + lastPos);
-				mLineRenderer.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * laserDistance));
+				myLineRenderer.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * laserDistance));
 
 				loopActive = false;
 			}
