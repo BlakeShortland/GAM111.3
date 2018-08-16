@@ -9,7 +9,6 @@ public class LaserController : MonoBehaviour
 	public int laserDistance;
 	public string bounceTag;
 	public string spawnedBeamTag;
-	public int maxBounce;
 	private float timer = 0;
 	private LineRenderer myLineRenderer;
 
@@ -46,7 +45,7 @@ public class LaserController : MonoBehaviour
 		bool loopActive = true; //Is the reflecting loop active?
 
 		Vector3 laserDirection = transform.forward; //direction of the next laser
-		Vector3 lastLaserPosition = transform.localPosition; //origin of the next laser
+		Vector3 lastLaserPosition = transform.position; //origin of the next laser
 
 		myLineRenderer.positionCount = 1;
 		myLineRenderer.SetPosition(0, transform.position);
@@ -72,12 +71,12 @@ public class LaserController : MonoBehaviour
 				vertexCounter++;
 				myLineRenderer.positionCount = vertexCounter;
 				Vector3 lastPos = lastLaserPosition + (laserDirection.normalized * laserDistance);
-				myLineRenderer.SetPosition(vertexCounter - 1, lastLaserPosition + (laserDirection.normalized * laserDistance));
+				myLineRenderer.SetPosition(vertexCounter - 1, lastPos);
+
+				Debug.Log(lastLaserPosition);
 
 				loopActive = false;
 			}
-			if (laserReflected > maxBounce)
-				loopActive = false;
 		}
 
 		yield return new WaitForEndOfFrame();
