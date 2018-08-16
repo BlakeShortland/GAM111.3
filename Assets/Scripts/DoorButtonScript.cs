@@ -12,9 +12,9 @@ public class DoorButtonScript : MonoBehaviour
 	[Header("A timer of 0 means that the timer will not be run, anything higher will dictate how long the door is open for.")]
 	[SerializeField] float openTimer = 0;
 	[Space(10)]
-
-	bool doorOpen = false;
-	bool doorLocked = false;
+	[Header("Door states")]
+	[SerializeField] bool doorOpen = false;
+	[SerializeField] bool doorLocked = false;
 
 	public void OpenClose()
 	{
@@ -48,7 +48,7 @@ public class DoorButtonScript : MonoBehaviour
 		}
 	}
 
-	void Lock()
+	public void Lock()
 	{
 		if (lights.Length != 0)
 		{
@@ -59,7 +59,7 @@ public class DoorButtonScript : MonoBehaviour
 		}
 	}
 
-	void Unlock()
+	public void Unlock()
 	{
 		if (lights.Length != 0)
 		{

@@ -7,8 +7,6 @@ public class LaserController : MonoBehaviour
 {
 	public float updateFrequency = 0.1f;
 	public int laserDistance;
-	public string bounceTag;
-	public string spawnedBeamTag;
 	private float timer = 0;
 	private LineRenderer myLineRenderer;
 
@@ -46,17 +44,24 @@ public class LaserController : MonoBehaviour
 
 		while (loopActive)
 		{
-			if (Physics.Raycast(lastLaserPosition, laserDirection, out hit, laserDistance) && ((hit.transform.gameObject.tag == bounceTag)))
+			if (Physics.Raycast(lastLaserPosition, laserDirection, out hit, laserDistance) && ((hit.transform.gameObject.tag == "Bounce") || hit.transform.gameObject.tag == "Receiver"))
 			{
-				laserReflected++;
-				vertexCounter += 3;
-				myLineRenderer.positionCount = vertexCounter;
-				myLineRenderer.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
-				myLineRenderer.SetPosition(vertexCounter - 2, hit.point);
-				myLineRenderer.SetPosition(vertexCounter - 1, hit.point);
-				lastLaserPosition = hit.point;
-				Vector3 prevDirection = laserDirection;
-				laserDirection = Vector3.Reflect(laserDirection, hit.normal);
+				if (hit.transform.gameObject.tag == "Bounce")
+				{
+					laserReflected++;
+					vertexCounter += 3;
+					myLineRenderer.positionCount = vertexCounter;
+					myLineRenderer.SetPosition(vertexCounter - 3, Vector3.MoveTowards(hit.point, lastLaserPosition, 0.01f));
+					myLineRenderer.SetPosition(vertexCounter - 2, hit.point);
+					myLineRenderer.SetPosition(vertexCounter - 1, hit.point);
+					lastLaserPosition = hit.point;
+					Vector3 prevDirection = laserDirection;
+					laserDirection = Vector3.Reflect(laserDirection, hit.normal);
+				}
+				if (hit.transform.gameObject.tag == "Receiver")
+				{
+					laserReceived(hit.transform.gameObject);
+				}
 			}
 			else
 			{
@@ -71,5 +76,10 @@ public class LaserController : MonoBehaviour
 		}
 
 		yield return new WaitForEndOfFrame();
+	}
+
+	void laserReceived(GameObject receiver)
+	{
+		receiver.GetComponent<LaserReciever>().Activate();
 	}
 }

@@ -56,14 +56,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1337148060624186}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.506, y: 0, z: -0.50499916}
+  m_LocalRotation: {x: -0, y: 0.3826838, z: -0, w: 0.9238794}
+  m_LocalPosition: {x: 9.214, y: 0, z: -8.647}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4792069216310146}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45.000004, z: 0}
 --- !u!4 &4792069216310146
 Transform:
   m_ObjectHideFlags: 1
@@ -127,7 +127,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+  - {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2025,8 +2025,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cec5c0b3178e54479faba1aab8a35d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 5
   door: {fileID: 0}
+  lights:
+  - {fileID: 0}
+  - {fileID: 0}
+  mirror: {fileID: 0}
+  openTimer: 5
 --- !u!114 &114990610902725156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2064,7 +2068,7 @@ MonoBehaviour:
       localPivot: {x: -0.1, y: 0.6131663}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   - _indices: 040000000500000006000000050000000700000006000000
@@ -2092,7 +2096,7 @@ MonoBehaviour:
       localPivot: {x: -0.15692556, y: 0.60855913}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   - _indices: 08000000090000000a000000090000000b0000000a000000
@@ -2120,7 +2124,7 @@ MonoBehaviour:
       localPivot: {x: 0.1, y: 0.56701577}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   - _indices: 0c0000000d0000000e0000000d0000000f0000000e000000
@@ -2148,7 +2152,7 @@ MonoBehaviour:
       localPivot: {x: 0.15692556, y: 0.60855913}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   - _indices: 100000001100000012000000110000001300000012000000
@@ -2176,7 +2180,7 @@ MonoBehaviour:
       localPivot: {x: 0.099999905, y: 0.537147}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   - _indices: 140000001500000016000000150000001700000016000000
@@ -2204,7 +2208,7 @@ MonoBehaviour:
       localPivot: {x: -0.1, y: -0.1}
       localSize: {x: 0, y: 0}
       anchor: 9
-    _mat: {fileID: 2100000, guid: f8af10ae2c674e569782e57b09c76a13, type: 2}
+    _mat: {fileID: 2100000, guid: 3e2afdf906d950e4e8232589e6a66bb2, type: 2}
     manualUV: 0
     textureGroup: -1
   _sharedIndices:
