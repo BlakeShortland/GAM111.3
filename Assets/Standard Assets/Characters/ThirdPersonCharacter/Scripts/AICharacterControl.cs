@@ -11,6 +11,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
 
+		public GameObject[] waypoints;
+		public GameObject player;
+
+		int targetID = 0;
 
         private void Start()
         {
@@ -20,7 +24,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
-        }
+
+			player = GameObject.FindGameObjectWithTag("Player");
+
+			NextTarget();
+		}
 
 
         private void Update()
@@ -34,10 +42,31 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 character.Move(Vector3.zero, false, false);
         }
 
+		private void OnTriggerStay(Collider collision)
+		{
+			if (collision.transform.tag == "Waypoint")
+			{
+				Vector3 targetDir = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z) - transform.position;
 
-        public void SetTarget(Transform target)
+				float step = agent.angularSpeed * Time.deltaTime;
+
+				Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0f);
+
+				transform.rotation = Quaternion.LookRotation(newDir);
+			}
+		}
+
+
+		public void SetTarget(Transform target)
         {
             this.target = target;
         }
+
+		public void NextTarget()
+		{
+			SetTarget(waypoints[targetID].transform);
+			if (targetID <= waypoints.Length)
+				targetID++;
+		}
     }
 }

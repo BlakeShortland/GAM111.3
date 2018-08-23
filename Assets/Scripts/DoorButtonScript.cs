@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class DoorButtonScript : MonoBehaviour
 {
 	[Header("The gameobject that this button will command.")]
-	[SerializeField] GameObject door;
-	[SerializeField] GameObject[] lights;
-	[SerializeField] GameObject mirror;
+	public GameObject door;
+	public GameObject stair;
+	public GameObject[] lights;
+	public GameObject mirror;
 	[Space(10)]
 	[Header("A timer of 0 means that the timer will not be run, anything higher will dictate how long the door is open for.")]
 	[SerializeField] float openTimer = 0;
@@ -15,9 +17,19 @@ public class DoorButtonScript : MonoBehaviour
 	[Header("Door states")]
 	[SerializeField] bool doorOpen = false;
 	[SerializeField] bool doorLocked = false;
+	[Space(10)]
+	[Header("Does this button tell the ai to progress?")]
+	[SerializeField] bool aiTrigger = false;
 
 	public void OpenClose()
 	{
+		if (aiTrigger)
+		{
+			GameObject ai = GameObject.FindGameObjectWithTag("AI");
+			ai.GetComponent<AICharacterControl>().NextTarget();
+			aiTrigger = false;
+		}
+
 		if (!doorLocked)
 		{
 			if (doorOpen)
@@ -31,7 +43,7 @@ public class DoorButtonScript : MonoBehaviour
 	{
 		if (door != null)
 		{
-			door.gameObject.SetActive(false);
+			door.GetComponent<DoorController>().Open();
 			doorOpen = true;
 
 			if (openTimer > 0)
@@ -43,8 +55,16 @@ public class DoorButtonScript : MonoBehaviour
 	{
 		if (door != null)
 		{
-			door.gameObject.SetActive(true);
+			door.GetComponent<DoorController>().Close();
 			doorOpen = false;
+		}
+	}
+
+	public void Up()
+	{
+		if (stair != null)
+		{
+			stair.GetComponent<StairsController>().Up();
 		}
 	}
 

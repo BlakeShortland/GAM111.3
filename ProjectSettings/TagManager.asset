@@ -9,6 +9,8 @@ TagManager:
   - Bounce
   - SpawnedBeam
   - Receiver
+  - Waypoint
+  - AI
   layers:
   - Default
   - TransparentFX

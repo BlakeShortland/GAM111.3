@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class LaserReciever : MonoBehaviour
 {
 	[SerializeField] GameObject buttonToActivate;
+	[SerializeField] bool aiTrigger = false;
 
 	LaserController laserController;
 
@@ -19,22 +21,40 @@ public class LaserReciever : MonoBehaviour
 	{
 		if (buttonToActivate != null)
 		{
-			if (recieving)
+			if (recieving && buttonToActivate.GetComponent<DoorButtonScript>().door != null)
 				buttonToActivate.GetComponent<DoorButtonScript>().Unlock();
-			if (!recieving)
+			if (!recieving && buttonToActivate.GetComponent<DoorButtonScript>().door != null)
 				buttonToActivate.GetComponent<DoorButtonScript>().Lock();
+
+			if (recieving && buttonToActivate.GetComponent<DoorButtonScript>().stair != null)
+				buttonToActivate.GetComponent<DoorButtonScript>().Up();
 		}
 	}
 
 	public void Activate ()
 	{
 		recieving = true;
-		laserController.ActivateLaser(true);
+
+		if (aiTrigger)
+		{
+			GameObject ai = GameObject.FindGameObjectWithTag("AI");
+			ai.GetComponent<AICharacterControl>().NextTarget();
+			aiTrigger = false;
+		}
+
+		if (laserController != null)
+		{
+			laserController.ActivateLaser(true);
+		}
 	}
 
 	public void Deactivate()
 	{
 		recieving = false;
-		laserController.ActivateLaser(false);
+
+		if (laserController != null)
+		{
+			laserController.ActivateLaser(false);
+		}
 	}
 }

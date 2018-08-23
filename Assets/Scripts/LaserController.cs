@@ -48,7 +48,7 @@ public class LaserController : MonoBehaviour
 
 			while (loopActive)
 			{
-				if (Physics.Raycast(lastLaserPosition, laserDirection, out hit, laserDistance) && (hit.transform.gameObject.tag == "Bounce" || hit.transform.gameObject.tag == "Receiver"))
+				if (Physics.Raycast(lastLaserPosition, laserDirection, out hit, laserDistance) && (hit.transform.gameObject.tag == "Bounce" || hit.transform.gameObject.tag == "Receiver" || hit.transform.gameObject.tag == "Door"))
 				{
 					if (hit.transform.gameObject.tag == "Bounce")
 					{
@@ -77,6 +77,17 @@ public class LaserController : MonoBehaviour
 
 						hitReciever = hit.transform.gameObject;
 						LaserReceived(hit.transform.gameObject,true);
+					}
+					if (hit.transform.gameObject.tag == "Door")
+					{
+						laserReflected++;
+						vertexCounter++;
+						myLineRenderer.positionCount = vertexCounter;
+						lastLaserPosition = hit.point;
+						Vector3 lastPos = lastLaserPosition;
+						myLineRenderer.SetPosition(vertexCounter - 1, lastPos);
+
+						loopActive = false;
 					}
 				}
 				else
