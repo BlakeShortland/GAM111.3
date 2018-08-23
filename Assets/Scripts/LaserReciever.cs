@@ -6,25 +6,35 @@ public class LaserReciever : MonoBehaviour
 {
 	[SerializeField] GameObject buttonToActivate;
 
+	LaserController laserController;
+
 	public bool recieving = false;
+
+	private void Awake()
+	{
+		laserController = GetComponentInChildren<LaserController>();
+	}
 
 	private void FixedUpdate()
 	{
-		if (!recieving)
-			Deactivate();
+		if (buttonToActivate != null)
+		{
+			if (recieving)
+				buttonToActivate.GetComponent<DoorButtonScript>().Unlock();
+			if (!recieving)
+				buttonToActivate.GetComponent<DoorButtonScript>().Lock();
+		}
 	}
 
 	public void Activate ()
 	{
-		Debug.Log("Issue is here 3");
 		recieving = true;
-		Debug.Log("Issue is here 4");
-		buttonToActivate.GetComponent<DoorButtonScript>().Unlock();
-		Debug.Log("Issue is here 5");
+		laserController.ActivateLaser(true);
 	}
 
-	void Deactivate()
+	public void Deactivate()
 	{
-		buttonToActivate.GetComponent<DoorButtonScript>().Lock();
+		recieving = false;
+		laserController.ActivateLaser(false);
 	}
 }
