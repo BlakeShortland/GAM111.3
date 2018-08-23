@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
 
 		pausePanel.gameObject.SetActive(true);
 
-		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.lockState = CursorLockMode.None;
 
 		Cursor.visible = true;
 

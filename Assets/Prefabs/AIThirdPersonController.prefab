@@ -612,6 +612,7 @@ GameObject:
   - component: {fileID: 195785604447608582}
   - component: {fileID: 114468477259225056}
   - component: {fileID: 114629914969298952}
+  - component: {fileID: 82279789408573972}
   m_Layer: 0
   m_Name: AIThirdPersonController
   m_TagString: AI
@@ -1541,6 +1542,119 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &82279789408573972
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769960711256270}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 30
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.01
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.36587036
+      value: 0.7880181
+      inSlope: -1.8834743
+      outSlope: -1.8834743
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.10718489
+    - serializedVersion: 3
+      time: 0.6025977
+      value: 0.20324099
+      inSlope: -1.4459485
+      outSlope: -1.4459485
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15394153
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.05581727
+      outSlope: -0.05581727
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.431217
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95004309825186856
 Animator:
   serializedVersion: 3
@@ -1598,6 +1712,29 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   player: {fileID: 0}
+  intro: {fileID: 8300000, guid: 5c270a24253392f45b07fb8fce25e61d, type: 3}
+  outro: {fileID: 8300000, guid: 5612f8826a7b34046ba161419f9cf4e8, type: 3}
+  objectiveComplete:
+  - {fileID: 8300000, guid: 28a7bbea2e91b014b9f3c532d1e37ab2, type: 3}
+  - {fileID: 8300000, guid: eadcf9f7c04cf40408c9b6087470960b, type: 3}
+  takingTooLong:
+  - {fileID: 8300000, guid: 2d20d88b8fb0abe49836fe84a0840ce0, type: 3}
+  - {fileID: 8300000, guid: 03b05b18aec7a2a4b8f40ef1368bb89b, type: 3}
+  - {fileID: 8300000, guid: 7c2d4f01fa6fe18468a5dc5d3946668b, type: 3}
+  - {fileID: 8300000, guid: f4a6c923eb4078242960a4dcc9e5677c, type: 3}
+  - {fileID: 8300000, guid: db4b67ae7b584914d96784563a06b841, type: 3}
+  - {fileID: 8300000, guid: 4cef83f5874d3c5408b5a7d0c913757a, type: 3}
+  - {fileID: 8300000, guid: 7b2ccfeac94f56d48b9b15346c929c88, type: 3}
+  - {fileID: 8300000, guid: 5c4d36b5b67bd9f4d8a7be3cbfd28d12, type: 3}
+  - {fileID: 8300000, guid: 528e4ab8ca0cc01499a90c93b5e67a7b, type: 3}
+  - {fileID: 8300000, guid: e3e7d7afe51aa9b4b86b19936495dd91, type: 3}
+  - {fileID: 8300000, guid: 6492a74faea5efd4f92692fd3ca07d07, type: 3}
+  - {fileID: 8300000, guid: c2768e4f0819b4342a9f1eb2cf0ba595, type: 3}
+  - {fileID: 8300000, guid: a0198a9057d74cb4dafd2fd3b9b38e6a, type: 3}
+  - {fileID: 8300000, guid: 31356ac4d4d5e394bbf7093e46d6610b, type: 3}
+  - {fileID: 8300000, guid: 5efdc68907e52964e9b1ea4e7929a166, type: 3}
+  - {fileID: 8300000, guid: fb80c1b3e841aea488e4ef7c6add2d2b, type: 3}
+  - {fileID: 8300000, guid: 80cca1a6c01bd4f4a97d5ab70cf5b0ee, type: 3}
 --- !u!114 &114629914969298952
 MonoBehaviour:
   m_ObjectHideFlags: 1

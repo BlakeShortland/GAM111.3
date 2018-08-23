@@ -21,15 +21,15 @@ public class DoorButtonScript : MonoBehaviour
 	[Header("Does this button tell the ai to progress?")]
 	[SerializeField] bool aiTrigger = false;
 
+	AudioSource beeper;
+
+	private void Awake()
+	{
+		beeper = GetComponent<AudioSource>();
+	}
+
 	public void OpenClose()
 	{
-		if (aiTrigger)
-		{
-			GameObject ai = GameObject.FindGameObjectWithTag("AI");
-			ai.GetComponent<AICharacterControl>().NextTarget();
-			aiTrigger = false;
-		}
-
 		if (!doorLocked)
 		{
 			if (doorOpen)
@@ -41,6 +41,13 @@ public class DoorButtonScript : MonoBehaviour
 
 	void Open()
 	{
+		if (aiTrigger)
+		{
+			GameObject ai = GameObject.FindGameObjectWithTag("AI");
+			ai.GetComponent<AICharacterControl>().NextTarget();
+			aiTrigger = false;
+		}
+
 		if (door != null)
 		{
 			door.GetComponent<DoorController>().Open();
@@ -97,6 +104,11 @@ public class DoorButtonScript : MonoBehaviour
 			mirror.transform.RotateAround(transform.position, Vector3.up, 90);
 			mirror.transform.localPosition = new Vector3(0, 0, 0);
 		}
+	}
+
+	public void Beep()
+	{
+		beeper.Play();
 	}
 
 	IEnumerator DoorTimer()

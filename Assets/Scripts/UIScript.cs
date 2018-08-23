@@ -8,16 +8,6 @@ public class UIScript : MonoBehaviour
 		SceneManager.LoadScene("Game");
 	}
 
-	public void ChangeSceneToReferences()
-	{
-		SceneManager.LoadScene("References");
-	}
-
-	public void ChangeSceneToMainMenu()
-	{
-		SceneManager.LoadScene("MainMenu");
-	}
-
 	public void CloseGame()
 	{
 		Application.Quit();

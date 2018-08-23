@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -16,11 +18,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		int targetID = 0;
 
-        private void Start()
+		AudioSource audioSource;
+
+		[SerializeField] AudioClip intro;
+		[SerializeField] AudioClip outro;
+		[SerializeField] AudioClip[] objectiveComplete;
+		[SerializeField] AudioClip[] takingTooLong;
+
+		private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
+			audioSource = GetComponent<AudioSource>();
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
@@ -28,6 +38,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			player = GameObject.FindGameObjectWithTag("Player");
 
 			NextTarget();
+
+			StartCoroutine(TakingTooLong());
 		}
 
 
@@ -41,6 +53,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             else
                 character.Move(Vector3.zero, false, false);
         }
+
+		private void OnTriggerEnter(Collider collision)
+		{
+			if (collision.transform.name == "Waypoint1")
+			{
+				PlayAudio(intro);
+			}
+
+			if (collision.transform.name == "Waypoint1 (7)")
+			{
+				PlayAudio(outro);
+				StartCoroutine(EndGame());
+			}
+		}
 
 		private void OnTriggerStay(Collider collision)
 		{
@@ -56,17 +82,63 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		private void OnTriggerExit(Collider collision)
+		{
+			if (collision.transform.name == "Waypoint1")
+			{
+				PlayAudio(objectiveComplete[0]);
+			}
+
+			if (collision.transform.name == "Waypoint1 (3)")
+			{
+				PlayAudio(objectiveComplete[1]);
+			}
+		}
 
 		public void SetTarget(Transform target)
         {
             this.target = target;
         }
 
+
 		public void NextTarget()
 		{
 			SetTarget(waypoints[targetID].transform);
 			if (targetID <= waypoints.Length)
 				targetID++;
+		}
+
+		IEnumerator TakingTooLong()
+		{
+			foreach (AudioClip audioClip in takingTooLong)
+			{
+				yield return new WaitForSeconds(15);
+
+				yield return new WaitWhile(IsAudioPlaying);
+
+				PlayAudio(audioClip);
+			}
+		}
+
+		bool IsAudioPlaying()
+		{
+			if (audioSource.isPlaying)
+				return true;
+			else
+				return false;
+		}
+
+		void PlayAudio(AudioClip audioClip)
+		{
+			audioSource.Stop();
+			audioSource.clip = audioClip;
+			audioSource.Play();
+		}
+
+		IEnumerator EndGame()
+		{
+			yield return new WaitWhile(IsAudioPlaying);
+			Application.Quit();
 		}
     }
 }

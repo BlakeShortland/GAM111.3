@@ -31,8 +31,12 @@ public class PlayerInteractionScript : MonoBehaviour
 			{
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					hit.transform.gameObject.GetComponent<DoorButtonScript>().OpenClose();
-					hit.transform.gameObject.GetComponent<DoorButtonScript>().Rotate();
+					DoorButtonScript doorButtonScript;
+					doorButtonScript = hit.transform.gameObject.GetComponent<DoorButtonScript>();
+
+					doorButtonScript.OpenClose();
+					doorButtonScript.Rotate();
+					doorButtonScript.Beep();
 				}
 			}
 		}
