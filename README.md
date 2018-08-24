@@ -8,7 +8,7 @@ Puzzle Solution:
 		- Next press the button further along the room from 		it.
 		- Lastly press the button next to the door to open 		it.
 	Puzzle 3:
-		- Ignore the row of buttons closest to thee door you 		came in through and proceed to the next row of 			buttons.
+		- Ignore the row of buttons closest to the door you 		came in through and proceed to the next row of 			buttons.
 		- Press the furthest left button.
 		- Next press the middle button.
 
